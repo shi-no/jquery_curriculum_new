@@ -101,7 +101,7 @@
         $('.select').change(function() {
           var language = $(this).val();
           if(language === 'all') {
-            $('ul.list li').show(function(){$(this)});
+            $('ul.list li').show();
           } else {
             $('ul.list li').each(function(index, frame) {
               if($(frame).data('category-type') === language){
