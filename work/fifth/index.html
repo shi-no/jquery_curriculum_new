@@ -100,14 +100,14 @@
       $(function() {
         $('.select').change(function() {
           var language = $(this).val();
-          if(language=='all') {
-            $('ul.list li').each(function(){$(this).show()});
+          if(language === 'all') {
+            $('ul.list li').show(function(){$(this)});
           } else {
-            $('ul.list li').each(function() {
-              if($(this).data('category-type')==language){
-                $(this).show();
+            $('ul.list li').each(function(index, frame) {
+              if($(frame).data('category-type') === language){
+                $(frame).show();
               } else {
-                $(this).hide();
+                $(frame).hide();
               }
             });
           }
