@@ -90,13 +90,13 @@
       $(function() {
         var page = 0;
         var keyword = '';
-        $('[data-js="search-btn"]').on('click', function() {
+        $('[data-js="search-btn"]').on('click', function() { //検索ボタンクリック時
           page = 1;
           keyword = $('[data-js="search-word"]').val();
           getBookData();
         });
 
-        $(document).on('click', '[data-js="page-next"]', function(e) {
+        $(document).on('click', '[data-js="page-next"]', function(e) { //次へ
           e.preventDefault();
           if ($(this).hasClass('disabled')) {
             return false;
@@ -108,7 +108,7 @@
           }, 0);
         });
 
-        $(document).on('click', '[data-js="page-prev"]', function(e) {
+        $(document).on('click', '[data-js="page-prev"]', function(e) { //前へ
           e.preventDefault();
           if ($(this).hasClass('disabled')) {
             return false;
@@ -120,7 +120,7 @@
           }, 0);
         });
 
-        function getBookData() {
+        function getBookData() { //url先のデータを取得するリクエスト
           $.ajax({
             url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
             type: 'GET', //特定の情報を検索、取得する(受信)
@@ -145,7 +145,7 @@
           });
         }
 
-        function showBookData(data) {
+        function showBookData(data) { //128行目
           var countZero = 0;
           if (data.count === countZero) {
             var errorMessage = $('<p class="error-message">検索結果が見つかりませんでした。<br>別のキーワードで検索してください。</p>');
@@ -169,18 +169,18 @@
           }
         }
 
-        function showPagination(data) {
+        function showPagination(data) { //128行目
           var pagination = '<div class="pager" data-js="pager">' +
-                             '<div class="counter">' +
-                               '<span class="counter-current">' + data.page + '</span>' + 
-                                 '/' + 
-                               '<span class="counter-all">' + data.pageCount + '</span>' +
-                             '</div>' +
-                             '<div class="btn-wrapper">' +
-                               '<a class="btn-item" data-js="page-prev" href="">前へ</a>' +
-                               '<a class="btn-item" data-js="page-next" href="">次へ</a>' +
-                             '</div>' +
-                           '</div>';
+                            '<div class="counter">' +
+                              '<span class="counter-current">' + data.page + '</span>' + 
+                                '/' + 
+                              '<span class="counter-all">' + data.pageCount + '</span>' +
+                            '</div>' +
+                            '<div class="btn-wrapper">' +
+                              '<a class="btn-item" data-js="page-prev" href="">前へ</a>' +
+                              '<a class="btn-item" data-js="page-next" href="">次へ</a>' +
+                            '</div>' +
+                          '</div>';
           $('.lists').after(pagination);
           
           var pageFirst = 1;
@@ -198,7 +198,7 @@
           $('.message').empty();
         }
 
-        function showErrorMessage(error) {
+        function showErrorMessage(error) { //楽天APIのエラー　HTTPのステータスコードとコンソールのerrorststus
           var errorMessage = '';
           switch (error.status) {
             case 0:
@@ -219,7 +219,7 @@
             case 503:
               errorMessage = 'メンテナンス・リクエスト過多 (全ユーザ制限値超過)';
               break;
-            default:
+            default://該当なし
               errorMessage = '予期せぬエラーが発生しました。';
               break;
           }
